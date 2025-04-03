@@ -1,6 +1,6 @@
-## Welcome to Student Queue Coordination Platform App
+# Welcome to Student Queue Coordination Platform App
 
-# Get started
+## Get started
 
 1. Install dependencies
 
