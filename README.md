@@ -1,6 +1,6 @@
 # Welcome to Student Queue Coordination Platform App
 
-## Get started
+## Get Started Marc
 
 1. Install dependencies
 
