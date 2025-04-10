@@ -25,6 +25,10 @@ const menuOptions = {
     "Updating Personal Details",
     "Requesting ID Cards",
   ],
+  continuing_student: [
+   "Continuing Student",
+   "New Student"
+  ]
 };
 
 export function useModalHandler(identifier: keyof typeof menuOptions) {
@@ -35,7 +39,7 @@ export function useModalHandler(identifier: keyof typeof menuOptions) {
   const closeModal = () => setSelectedText(null);
   const proceed = () => {
     closeModal();
-    router.replace("/waiting");
+    router.replace("/continuing");
   };
 
   return { menuOptions: menuOptions[identifier], selectedText, openModal, closeModal, proceed };

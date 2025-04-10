@@ -4,7 +4,7 @@ import ConfirmationModal from "@/components/ConfirmationModal";
 import { useModalHandler } from "@/hooks/useModalHandler";
 
 export default function Graduation() {
-  const { menuOptions, selectedText, openModal, closeModal, proceed } = useModalHandler("graduation");
+  const { menuOptions, selectedText, openModal, closeModal, proceed } = useModalHandler("continuing_student");
 
   return (
     <View className="flex-1 justify-center items-center bg-[#312C51] px-6">

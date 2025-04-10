@@ -9,7 +9,7 @@ export default function MenuButton({ text, onPress }: {
       onPress={onPress} 
       className="w-full bg-[#F0C38E] py-4 rounded-2xl items-center active:scale-95 shadow-lg my-2"
     >
-      <Text className="text-[#312C51] text-lg font-semibold">{text}</Text>
+     <Text className="text-[#312C51] text-lg font-semibold">{text}</Text> 
     </TouchableOpacity>
   );
 }

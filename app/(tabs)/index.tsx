@@ -17,16 +17,21 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
-      <Text className="text-[#F1AA9B] text-3xl font-bold text-center mb-6 mt-12">
-        Welcome to Student Portal
+      <Text className="text-[#F1AA9B] text-3xl font-light text-center mb-6 mt-12">
+        Welcome to Student Portal 
       </Text>
 
       <View className="w-full max-w-md">
-        <MenuButton text="Enrollment & Registration" onPress={() => router.replace("/enrollment")}/>
-        <MenuButton text="Academic Records" onPress={() => router.replace("/records")}/>
-        <MenuButton text="Financial & Administrative" onPress={() => router.replace("/finance")}/>
-        <MenuButton text="Personal Information" onPress={() => router.replace("/profile")}/>
-        <MenuButton text="Graduation & Diplomas" onPress={() => router.replace("/graduation")}/>
+        <MenuButton text="Student Certificate/Record" onPress={() => router.replace("/Record")}/>
+        <MenuButton text="Authentication and Verification" onPress={() => router.replace("/auth")}/>
+        <MenuButton text="ID Replacement" onPress={() => router.replace("/id")}/>
+        <MenuButton text="Evaluation of Transfer Credits" onPress={() => router.replace("/transfer")}/>
+        <MenuButton text="Enrollment" onPress={() => router.replace("/enrol")}/>
+        <MenuButton text="Adding/Dropping/Change of Schedule" onPress={() => router.replace("/add")}/>
+        <MenuButton text="Re-admission" onPress={() => router.replace("/reAdd")}/>
+        <MenuButton text="Change in Program" onPress={() => router.replace("/change")}/>
+          
+
       </View>
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
