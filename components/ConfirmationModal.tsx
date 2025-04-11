@@ -16,14 +16,13 @@ export default function ConfirmationModal({
   const router = useRouter();
 
   const handleProceed = async () => {
-    console.log("🚀 Proceed button clicked");
     try {
       console.log("⏳ Requesting queue number from Convex...");
       const number = await getNextQueueNumber({});
       console.log("✅ Queue number received:", number);
 
-      onClose(); // hide modal
-      router.replace("/(tabs)/waiting"); // navigate after success
+      onClose();
+      router.replace("/(tabs)/waiting");
     } catch (error) {
       console.error("❌ Failed to get queue number from Convex:", error);
     }
