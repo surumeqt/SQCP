@@ -3,7 +3,7 @@ import React from 'react';
 import Marc from '@/components/marc';
 import { useRouter } from "expo-router";
 
-export default function Record() {
+export default function NewStudent() {
   const router = useRouter();
 
   return (

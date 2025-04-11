@@ -18,7 +18,7 @@ export default function Index() {
       </View>
 
       <Text className="text-[#F1AA9B] text-3xl font-light text-center mb-6 mt-12">
-        Welcome to Student Portal 
+        Welcome to Student Process Queuing Platform 
       </Text>
 
       <View className="w-full max-w-md">
@@ -30,8 +30,6 @@ export default function Index() {
         <MenuButton text="Adding/Dropping/Change of Schedule" onPress={() => router.replace("/add")}/>
         <MenuButton text="Re-admission" onPress={() => router.replace("/reAdd")}/>
         <MenuButton text="Change in Program" onPress={() => router.replace("/change")}/>
-          
-
       </View>
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />

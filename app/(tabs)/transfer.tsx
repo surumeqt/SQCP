@@ -3,7 +3,7 @@ import React from 'react'
 import Marc from '@/components/marc'
 import { useRouter } from "expo-router";
 
-export default function Record() {
+export default function Transfer() {
     const router = useRouter();
   return (
     <View className="w-full max-w-md flex-1 bg-[#312C51] justify-center">
