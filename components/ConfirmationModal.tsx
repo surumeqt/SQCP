@@ -1,19 +1,19 @@
 import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { useRouter } from "expo-router";
 
 export default function ConfirmationModal({ 
   visible, 
   onClose, 
-  text, 
-  onProceed 
+  text
 }: { 
   visible: boolean; 
   onClose: () => void; 
   text: string;
-  onProceed: (queueNumber: number) => void; 
 }) {
   const getNextQueueNumber = useMutation(api.queue.getNextQueueNumber);
+  const router = useRouter();
 
   const handleProceed = async () => {
     console.log("🚀 Proceed button clicked");
@@ -21,7 +21,9 @@ export default function ConfirmationModal({
       console.log("⏳ Requesting queue number from Convex...");
       const number = await getNextQueueNumber({});
       console.log("✅ Queue number received:", number);
-      onProceed(number);
+
+      onClose(); // hide modal
+      router.replace("/(tabs)/waiting"); // navigate after success
     } catch (error) {
       console.error("❌ Failed to get queue number from Convex:", error);
     }
