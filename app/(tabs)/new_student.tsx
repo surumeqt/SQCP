@@ -1,10 +1,11 @@
 import { View, Text, TouchableOpacity, ScrollView} from 'react-native';
-import React from 'react';
 import Marc from '@/components/marc';
-import { useRouter } from "expo-router";
+import ConfirmationModal from '@/components/ConfirmationModal';
+import { useState } from 'react';
 
 export default function NewStudent() {
-  const router = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
+  const headerText = "Continuing Students";
 
   return (
    <View className="flex-1 bg-[#312C51]">
@@ -12,7 +13,6 @@ export default function NewStudent() {
         contentContainerStyle={{ paddingVertical: 12, paddingHorizontal: 8 }}
         showsVerticalScrollIndicator={false}
       >     
-      <Marc text="Enrollment Process (New Student)" variant="plain" />
       <Marc text="Submit complete enrollment requirements to the IGS Office (Rm.105)" />
       <Marc text='Fill-out Student Information in the Enrollment Evaluation Form' />
       <Marc text='Review and affix signature in the Enrollment Evaluation Form' />
@@ -22,15 +22,18 @@ export default function NewStudent() {
       </ScrollView>
 
 
-      {/* Confirm button */}
-      <TouchableOpacity
-        onPress={() => router.replace('/(tabs)/waiting')}
-        className="bg-[#F8D8AD] text-[#312C51] font-semibold text-2xl text-center mt-4 mb-6 rounded-lg w-[90%] self-center p-3"
-      >
+     <TouchableOpacity
+             onPress={() => setModalVisible(true)}
+              className="bg-[#F8D8AD] text-[#312C51] font-semibold text-2xl text-center mt-2 mb-6 rounded-lg w-[90%] self-center p-3">
         <Text className="text-[#312C51] text-xl text-center font-semibold">
-          Confirm
+                 Confirm
         </Text>
-      </TouchableOpacity>
+     </TouchableOpacity>
+                    
+     <ConfirmationModal
+           visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            text={headerText}/>
     </View>
   );
 }
