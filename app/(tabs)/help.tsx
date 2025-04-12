@@ -7,18 +7,18 @@ export default function HelpAndSupport() {
       <Text style={styles.title}>Help & Support</Text>
 
       <Text style={styles.sectionTitle}>1. Frequently Asked Questions (FAQs)</Text>
-      <Text style={styles.text}>- How do I register for a queue? Simply select the service you need...</Text>
-      <Text style={styles.text}>- How can I check my queue status? You can check your queue status...</Text>
-      <Text style={styles.text}>- What if I miss my turn? If you miss your turn, you can...</Text>
+      <Text style={styles.text}>- How do I register for a queue? Simply select the service that you need and click confirm then proceed.</Text>
+      <Text style={styles.text}>- How can I check my queue status? You can check your queue status after clicking proceed.</Text>
+      <Text style={styles.text}>- What if I miss my turn? If you miss your turn, you can register again.</Text>
 
       <Text style={styles.sectionTitle}>2. Contact Support</Text>
       <Text style={styles.text}>Email Support: support@yourcompany.com</Text>
       <Text style={styles.text}>Phone Support: +123-456-7890</Text>
-      <Text style={styles.text}>Live Chat: Available in-app</Text>
 
       <Text style={styles.sectionTitle}>3. Troubleshooting Tips</Text>
-      <Text style={styles.text}>- Problem: I’m not receiving notifications. Make sure your app notifications...</Text>
-      <Text style={styles.text}>- Problem: The system is not letting me register. Ensure all required fields...</Text>
+      <Text style={styles.text}>- Problem: I’m not receiving notifications? {"\n"} 
+        Make sure your app notifications is on.</Text>
+      <Text style={styles.text}>- Problem: The system is not letting me register? {"\n"} Kindly refresh the app.</Text>
 
       <Text style={styles.sectionTitle}>4. Report an Issue</Text>
       <Text style={styles.text}>Email Issue Reporting: issues@yourcompany.com</Text>
