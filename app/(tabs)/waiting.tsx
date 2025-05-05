@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -50,6 +50,13 @@ export default function WaitingScreen() {
           <Text className="text-[#F0C38E] text-lg text-center">
             Time Left: {timeLeft !== null ? `${timeLeft}s` : "Loading..."}
           </Text>
+          <TouchableOpacity
+        className="bg-[#F8D8AD] rounded-lg py-3 px-4 mt-4 w-[90%] self-center">
+        <Text className="text-[#312C51] text-xl text-center font-semibold">
+          Confirm
+        </Text>
+      </TouchableOpacity>
+
         </>
       ) : (
         <Text className="text-red-400 text-lg">No queue assigned.</Text>

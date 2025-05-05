@@ -29,6 +29,7 @@ const menuOptions = {
    "Continuing Student",
    "New Student"
   ]
+  
 };
 
 export function useModalHandler(identifier: keyof typeof menuOptions) {
