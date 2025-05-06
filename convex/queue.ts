@@ -45,7 +45,7 @@ export const getOrCreateQueueEntryForUser = mutation(async ({ db, auth }) => {
     .query("queue")
     .withIndex("by_user", (q) => q.eq("userId", userId))
     .first();
-
+  
   if (existingEntry) {
     if (!existingEntry.expiresAt) {
       const newExpiresAt = Date.now() + 5 * 60 * 1000;

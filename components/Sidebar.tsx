@@ -42,7 +42,7 @@ export default function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose:
             <TouchableOpacity className="mb-4" onPress={() => router.replace("/privacy")}>
             <Text className="text-white text-lg">Privacy</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="mb-4" onPress={() => router.replace("/help")}>
+            <TouchableOpacity className="mb-4" onPress={() => router.replace("/")}>
             <Text className="text-white text-lg">Help & Support</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={logout}>
