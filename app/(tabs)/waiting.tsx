@@ -1,14 +1,7 @@
-<<<<<<< HEAD
   import { View, Text } from "react-native";
   import { useEffect, useState } from "react";
   import { useMutation } from "convex/react";
   import { api } from "../../convex/_generated/api";
-=======
-import { View, Text, TouchableOpacity } from "react-native";
-import { useEffect, useState } from "react";
-import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
->>>>>>> b3256deed423b80c1701f8f6a07da6ef7a09fde9
 
   export default function WaitingScreen() {
     const getOrCreateQueue = useMutation(api.queue.getOrCreateQueueEntryForUser);
@@ -46,7 +39,6 @@ import { api } from "../../convex/_generated/api";
 
         setTimeLeft(formatted);
 
-<<<<<<< HEAD
         if (diff === 0) clearInterval(interval);
       }, 1000);
 
@@ -74,27 +66,3 @@ import { api } from "../../convex/_generated/api";
       </View>
     );
   }
-=======
-      {queueEntry ? (
-        <>
-          <Text className="text-white text-lg text-center mb-2">
-            Your Queue Number: {queueEntry.number}
-          </Text>
-          <Text className="text-[#F0C38E] text-lg text-center">
-            Time Left: {timeLeft !== null ? `${timeLeft}s` : "Loading..."}
-          </Text>
-          <TouchableOpacity
-        className="bg-[#F8D8AD] rounded-lg py-3 px-4 mt-4 w-[90%] self-center">
-        <Text className="text-[#312C51] text-xl text-center font-semibold">
-          Confirm
-        </Text>
-      </TouchableOpacity>
-
-        </>
-      ) : (
-        <Text className="text-red-400 text-lg">No queue assigned.</Text>
-      )}
-    </View>
-  );
-}
->>>>>>> b3256deed423b80c1701f8f6a07da6ef7a09fde9
