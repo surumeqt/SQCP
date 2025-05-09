@@ -28,6 +28,8 @@ export default function ConfirmationModal({
     }
   };
 
+  
+
   return (
     <Modal transparent visible={visible} animationType="fade">
       <View className="flex-1 justify-center items-center bg-black/50">
@@ -42,6 +44,8 @@ export default function ConfirmationModal({
             <TouchableOpacity onPress={handleProceed} className="bg-[#F0C38E] px-5 py-2 rounded-lg">
               <Text className="text-[#312C51] font-semibold">Proceed</Text>
             </TouchableOpacity>
+
+            
           </View>
         </View>
       </View>
