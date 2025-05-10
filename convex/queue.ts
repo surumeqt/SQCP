@@ -130,3 +130,19 @@ export const getQueueEntryByNumber = query(
     };
   }
 );
+
+export const getCurrentUserQueueEntry = query({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return null;
+
+    const queue = await ctx.db
+      .query("queue")
+      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .order("desc")
+      .take(1);
+
+    return queue[0] ?? null;
+  },
+});

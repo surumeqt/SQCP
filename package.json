@@ -1,12 +1,10 @@
 {
   "name": "studentqueuecoordinationplatform",
-  "main": "expo-router/entry",
+  "main": "src/entry.tsx",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
-    "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint"
@@ -23,11 +21,13 @@
     "convex": "^1.20.0",
     "expo": "^53.0.7",
     "expo-blur": "~14.1.4",
-    "expo-constants": "~17.1.5",
+    "expo-constants": "~17.1.6",
     "expo-dev-client": "~5.1.8",
+    "expo-device": "~7.1.4",
     "expo-font": "~13.3.1",
     "expo-haptics": "~14.1.4",
     "expo-linking": "~7.1.4",
+    "expo-notifications": "~0.31.1",
     "expo-router": "^5.0.5",
     "expo-secure-store": "~14.2.3",
     "expo-splash-screen": "^0.30.8",

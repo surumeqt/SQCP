@@ -13,6 +13,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as getQueue from "../getQueue.js";
 import type * as http from "../http.js";
 import type * as queue from "../queue.js";
 import type * as users from "../users.js";
@@ -26,6 +27,7 @@ import type * as users from "../users.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  getQueue: typeof getQueue;
   http: typeof http;
   queue: typeof queue;
   users: typeof users;
