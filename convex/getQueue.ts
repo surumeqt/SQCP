@@ -9,7 +9,6 @@ export const getCurrentQueue = query({
       .order("asc")
       .collect();
 
-    // Find the first queue that is either active or missing isActive
     const activeQueue = result.find((entry) =>
       entry.isActive === undefined || entry.isActive === true
     );
@@ -34,7 +33,17 @@ export const proceedToNextQueue = mutation({
     // Deactivate the current queue entry
     await db.patch(current._id, { isActive: false });
 
-    // Return the updated current (now inactive) for tracking
-    return current;
+    // Delete the current queue entry
+    await db.delete(current._id);
+
+    // Find the next active entry
+    const next = await db
+      .query("queue")
+      .filter((q) => q.eq(q.field("isActive"), true))
+      .order("asc")
+      .take(1);
+
+    return next.length > 0 ? next[0] : null;
   },
 });
+

@@ -13,7 +13,7 @@ export default defineSchema({
       number: v.number(),
       userId: v.string(),
       createdAt: v.number(),
-      expiresAt: v.optional(v.number()),
+      expiresAt: v.number(),
       isActive: v.optional(v.boolean()),
     })
     .index("by_user", ["userId"])

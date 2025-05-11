@@ -17,18 +17,13 @@ export default function ConfirmationModal({
 
   const handleProceed = async () => {
     try {
-      console.log("⏳ Requesting queue number from Convex...");
-      const number = await getNextQueueNumber({});
-      console.log("✅ Queue number received:", number);
-
-      onClose();
+      await getNextQueueNumber({});
       router.replace("/(tabs)/waiting");
+      onClose();
     } catch (error) {
       console.error("❌ Failed to get queue number from Convex:", error);
     }
   };
-
-  
 
   return (
     <Modal transparent visible={visible} animationType="fade">
@@ -43,9 +38,7 @@ export default function ConfirmationModal({
             </TouchableOpacity>
             <TouchableOpacity onPress={handleProceed} className="bg-[#F0C38E] px-5 py-2 rounded-lg">
               <Text className="text-[#312C51] font-semibold">Proceed</Text>
-            </TouchableOpacity>
-
-            
+            </TouchableOpacity> 
           </View>
         </View>
       </View>
