@@ -4,8 +4,8 @@ import { api } from "@/convex/_generated/api";
 import { useRouter } from "expo-router";
 
 export default function ConfirmationModal({ 
-  visible, 
-  onClose, 
+  visible,
+  onClose,
   text
 }: { 
   visible: boolean; 
@@ -39,6 +39,98 @@ export default function ConfirmationModal({
             <TouchableOpacity onPress={handleProceed} className="bg-[#F0C38E] px-5 py-2 rounded-lg">
               <Text className="text-[#312C51] font-semibold">Proceed</Text>
             </TouchableOpacity> 
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+export const LogoutModal = ({
+  visible,
+  onClose,
+  handleLogout,
+}: {
+  visible: boolean;
+  onClose: () => void;
+  handleLogout: () => void;
+}) => {
+  return (
+    <Modal visible={visible} transparent animationType="fade">
+      <View className="flex-1 justify-center items-center bg-black/50">
+        <View className="w-80 bg-[#48426D] p-6 rounded-2xl shadow-md">
+          <Text className="text-lg font-bold text-[#F1AA9B] mb-4 text-center">
+            Confirm Logout
+          </Text>
+          <Text className="text-white text-center mb-4">
+            Are you sure you want to log out?
+          </Text>
+
+          <View className="flex-row justify-center mt-4">
+            <TouchableOpacity
+              onPress={onClose}
+              className="bg-[#F0C38E] py-3 px-6 rounded-lg mr-3"
+            >
+              <Text className="text-[#312C51] font-semibold text-lg">
+                Cancel
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={handleLogout}
+              className="bg-[#F1AA9B] py-3 px-6 rounded-lg ml-3"
+            >
+              <Text className="text-[#312C51] font-semibold text-lg">
+                Logout
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
+export const StopEntryModal = ({
+  visible,
+  onClose,
+  handleStop,
+}:{
+  visible: boolean;
+  onClose: () => void;
+  handleStop: () => void;
+}) => {
+  return (
+    <Modal visible={visible} transparent animationType="fade">
+      <View className="flex-1 justify-center items-center bg-black/50">
+        <View className="w-90 bg-[#48426D] p-6 rounded-2xl shadow-md">
+          <Text className="text-xl font-bold text-[#F1AA9B] mb-4 text-center">
+            Stop Entry
+          </Text>
+          <Text className="text-white text-center mb-4">
+            Are you sure you want to stop your entry? {'\n'}
+            This will remove you from the queue, {'\n'}
+            You can rejoin the queue later.
+          </Text>
+
+          <View className="flex-row justify-center mt-4">
+            <TouchableOpacity
+              onPress={onClose}
+              className="bg-[#F0C38E] py-3 px-6 rounded-lg mr-3"
+            >
+              <Text className="text-[#312C51] font-semibold text-lg">
+                Cancel
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={handleStop}
+              className="bg-[#F1AA9B] py-3 px-6 rounded-lg ml-3"
+            >
+              <Text className="text-[#312C51] font-semibold text-lg">
+                Stop
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

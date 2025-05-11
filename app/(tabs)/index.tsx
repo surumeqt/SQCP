@@ -1,6 +1,12 @@
 import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  BackHandler,
+  Alert,
+} from "react-native";
+import { useFocusEffect, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import MenuButton from "@/components/MenuButton";
 import Sidebar from "@/components/Sidebar";
@@ -8,6 +14,32 @@ import Sidebar from "@/components/Sidebar";
 export default function Index() {
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useFocusEffect(() => {
+    const onBackPress = () => {
+      Alert.alert(
+        "Exit App",
+        "Are you sure you want to exit the app?",
+        [
+          { text: "Cancel", style: "cancel" },
+          {
+            text: "Exit",
+            style: "destructive",
+            onPress: () => BackHandler.exitApp(), // exits app
+          },
+        ],
+        { cancelable: true }
+      );
+      return true; // block default behavior
+    };
+
+    const subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onBackPress
+    );
+
+    return () => subscription.remove();
+  });
 
   return (
     <View className="flex-1 bg-[#312C51] px-6 pt-12">
@@ -18,18 +50,42 @@ export default function Index() {
       </View>
 
       <Text className="text-[#F1AA9B] text-3xl font-light text-center mb-6 mt-12">
-        Welcome to Student Process Queuing Platform 
+        Welcome to Student Process Queuing Platform
       </Text>
 
       <View className="w-full max-w-md">
-        <MenuButton text="Student Certificate/Record" onPress={() => router.replace("/Record")}/>
-        <MenuButton text="Authentication and Verification" onPress={() => router.replace("/auth")}/>
-        <MenuButton text="ID Replacement" onPress={() => router.replace("/id")}/>
-        <MenuButton text="Evaluation of Transfer Credits" onPress={() => router.replace("/transfer")}/>
-        <MenuButton text="Enrollment" onPress={() => router.replace("/enrol")}/>
-        <MenuButton text="Adding/Dropping/Change of Schedule" onPress={() => router.replace("/add")}/>
-        <MenuButton text="Re-admission" onPress={() => router.replace("/reAdd")}/>
-        <MenuButton text="Change in Program" onPress={() => router.replace("/change")}/>
+        <MenuButton
+          text="Student Certificate/Record"
+          onPress={() => router.replace("/Record")}
+        />
+        <MenuButton
+          text="Authentication and Verification"
+          onPress={() => router.replace("/auth")}
+        />
+        <MenuButton
+          text="ID Replacement"
+          onPress={() => router.replace("/id")}
+        />
+        <MenuButton
+          text="Evaluation of Transfer Credits"
+          onPress={() => router.replace("/transfer")}
+        />
+        <MenuButton
+          text="Enrollment"
+          onPress={() => router.replace("/enrol")}
+        />
+        <MenuButton
+          text="Adding/Dropping/Change of Schedule"
+          onPress={() => router.replace("/add")}
+        />
+        <MenuButton
+          text="Re-admission"
+          onPress={() => router.replace("/reAdd")}
+        />
+        <MenuButton
+          text="Change in Program"
+          onPress={() => router.replace("/change")}
+        />
       </View>
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />

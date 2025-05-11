@@ -1,11 +1,13 @@
 import { View, Text, TouchableOpacity, Animated } from "react-native";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useAuth } from '@clerk/clerk-expo';
+import { LogoutModal } from "@/components/ConfirmationModal";
 
 export default function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const { signOut, isSignedIn} = useAuth();
+    const [logoutModalVisible, setLogoutModalVisible] = useState(false);
     const translateX = useRef(new Animated.Value(300)).current;
     useEffect(() => {
         Animated.timing(translateX, {
@@ -15,11 +17,9 @@ export default function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose:
         }).start();
     }, [isOpen]);
 
-    const logout = async () => {
-
+    const Logout = async () => {
         await signOut();
         console.log("✅ User Successfully Signed-Out")
-
         if(!isSignedIn){
         router.replace('/(auth)/login')
         }
@@ -45,9 +45,10 @@ export default function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose:
             <TouchableOpacity className="mb-4" onPress={() => router.replace("/")}>
             <Text className="text-white text-lg">Help & Support</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={logout}>
+            <TouchableOpacity onPress={() => setLogoutModalVisible(true)}>
             <Text className="text-red-400 text-lg">Logout</Text>
             </TouchableOpacity>
+            <LogoutModal visible={logoutModalVisible} onClose={() => setLogoutModalVisible(false)} handleLogout={Logout} />
         </Animated.View>
         </View>
     );

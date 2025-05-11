@@ -1,4 +1,5 @@
 import { mutation, query } from "./_generated/server";
+import { v } from "convex/values";
 
 export const getNextQueueNumber = mutation({
   args: {},
@@ -61,5 +62,12 @@ export const getActiveQueueEntryForUser = query({
       .first();
 
     return activeEntry;
+  },
+});
+
+export const deleteQueueEntry = mutation({
+  args: { id: v.id("queue") },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
   },
 });

@@ -1,13 +1,39 @@
-import { View, Text } from "react-native";
+import { View, Text, BackHandler, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { useRouter } from "expo-router";
+import { useFocusEffect } from "@react-navigation/native";
 import { api } from "../../convex/_generated/api";
+import { Id } from '@/convex/_generated/dataModel'
+import { StopEntryModal } from "@/components/ConfirmationModal";
 
 export default function WaitingScreen() {
   const router = useRouter();
+  const deleteEntry = useMutation(api.queue.deleteQueueEntry);
+  const [ showModal, setShowModal ] = useState(false);
   const checkEntry = useQuery(api.queue.getActiveQueueEntryForUser);
   const [timeLeft, setTimeLeft] = useState<string | null>(null);
+
+  const handleStopPress = async () => {
+    try{
+      await deleteEntry({ id: checkEntry?._id as Id<"queue"> });
+      console.log("Queue entry deleted successfully.");
+      router.replace("/(tabs)");
+    } catch (error) {
+      console.error("❌ Failed to delete queue entry:", error);
+    }
+  };
+
+  // Prevent back navigation
+  useFocusEffect(() => {
+    const onBackPress = () => true;
+
+    const subscription = BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+    return () => {
+      subscription.remove();
+    };
+  });
 
   // Timer countdown logic
   useEffect(() => {
@@ -36,7 +62,7 @@ export default function WaitingScreen() {
     return () => clearInterval(interval);
   }, [checkEntry?.expiresAt]);
 
-  // Auto-redirect if no active entry or isActive becomes false
+  // 🚫 Auto-redirect if no active entry or isActive is false
   useEffect(() => {
     if (checkEntry === null || checkEntry?.isActive === false) {
       console.log("No active queue entry or entry is inactive.");
@@ -58,10 +84,18 @@ export default function WaitingScreen() {
           <Text className="text-[#F0C38E] text-lg text-center">
             Time Left: {timeLeft ?? "Loading..."}
           </Text>
+          <TouchableOpacity className="bg-[#F1AA9B] rounded-full px-4 py-2 mt-4 w-[60%]" onPress={() => setShowModal(true)}>
+            <Text className="text-white text-lg text-center">Stop</Text>
+          </TouchableOpacity>
         </>
       ) : (
         <Text className="text-red-400 text-lg">No queue assigned.</Text>
       )}
+      <StopEntryModal
+        visible={showModal}
+        onClose={() => setShowModal(false)}
+        handleStop={handleStopPress}
+      />
     </View>
   );
 }

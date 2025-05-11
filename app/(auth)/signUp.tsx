@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View, Alert, ActivityIndicator } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 export default function SignUp() {
     const { isLoaded, signUp, setActive } = useSignUp();
@@ -11,6 +13,7 @@ export default function SignUp() {
     const [pendingVerification, setPendingVerification] = useState(false);
     const [code, setCode] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const onSignUpPress = async () => {
         if (!isLoaded) return;
@@ -73,14 +76,26 @@ export default function SignUp() {
                       placeholderTextColor="#F1AA9B"
                       onChangeText={setEmailAddress}
                   />
-                  <TextInput
-                      className="border border-[#F0C38E] rounded-md p-3 mb-4 text-white"
-                      value={password}
-                      placeholder="Enter password"
-                      placeholderTextColor="#F1AA9B"
-                      secureTextEntry
-                      onChangeText={setPassword}
-                  />
+                    <View className="relative mb-4">
+                        <TextInput
+                            className="border border-[#F0C38E] rounded-md p-3 mb-4 text-white"
+                            value={password}
+                            placeholder="Password"
+                            placeholderTextColor="#F1AA9B"
+                            secureTextEntry={!showPassword}
+                            onChangeText={setPassword}
+                        />
+                        <TouchableOpacity
+                            className="absolute right-3 top-2.5"
+                            onPress={() => setShowPassword(!showPassword)}
+                        >
+                            <Ionicons
+                            name={showPassword ? "eye" : "eye-off"}
+                            size={24}
+                            color="#F1AA9B"
+                            />
+                        </TouchableOpacity>
+                    </View>
                   <TouchableOpacity
                       onPress={onSignUpPress}
                       className="bg-[#F0C38E] py-3 rounded-2xl items-center"
@@ -89,7 +104,7 @@ export default function SignUp() {
                   </TouchableOpacity>
                   <View className="flex-row gap-2 mt-4 justify-center">
                       <Text className="text-[#F1AA9B]">Have an account?</Text>
-                      <TouchableOpacity onPress={() => router.push('/login')}>
+                      <TouchableOpacity onPress={() => router.replace('/login')}>
                           <Text className="text-[#F0C38E]">Sign in</Text>
                       </TouchableOpacity>
                   </View>

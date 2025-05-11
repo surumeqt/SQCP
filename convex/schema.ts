@@ -7,7 +7,8 @@ export default defineSchema({
     email: v.string(),
     image: v.string(),
     clerkID: v.string(),
-    }).index('by_clerk_id', ['clerkID']),
+    })
+    .index('by_clerk_id', ['clerkID']),
     
     queue: defineTable({
       number: v.number(),

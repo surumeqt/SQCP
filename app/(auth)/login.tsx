@@ -2,6 +2,7 @@ import { useSignIn } from '@clerk/clerk-expo'
 import { useRouter } from 'expo-router'
 import { Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useState } from "react";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn()
@@ -10,6 +11,7 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSignInPress = React.useCallback(async () => {
     if (!isLoaded) return
@@ -20,7 +22,7 @@ export default function Page() {
 
       if (signInAttempt.status === 'complete') {
         await setActive({ session: signInAttempt.createdSessionId })
-        router.replace('/')
+        router.replace('/(tabs)')
       }
     } catch (err) {
       console.error(err)
@@ -41,14 +43,26 @@ export default function Page() {
           placeholderTextColor="#F1AA9B"
           onChangeText={setEmailAddress}
         />
-        <TextInput
-          className="border border-[#F0C38E] rounded-md p-3 mb-4 text-white"
-          value={password}
-          placeholder="Enter password"
-          placeholderTextColor="#F1AA9B"
-          secureTextEntry
-          onChangeText={setPassword}
-        />
+        <View className="relative mb-4">
+            <TextInput
+                className="border border-[#F0C38E] rounded-md p-3 mb-4 text-white"
+                value={password}
+                placeholder="Password"
+                placeholderTextColor="#F1AA9B"
+                secureTextEntry={!showPassword}
+                onChangeText={setPassword}
+            />
+            <TouchableOpacity
+                className="absolute right-3 top-2.5"
+                onPress={() => setShowPassword(!showPassword)}
+            >
+                <Ionicons
+                name={showPassword ? "eye" : "eye-off"}
+                size={24}
+                color="#F1AA9B"
+                />
+            </TouchableOpacity>
+        </View>
         <TouchableOpacity
           onPress={onSignInPress}
           disabled={loading}
@@ -58,7 +72,7 @@ export default function Page() {
         </TouchableOpacity>
         <View className="flex-row gap-2 mt-4 justify-center">
           <Text className="text-[#F1AA9B]">Don't have an account?</Text>
-          <TouchableOpacity onPress={() => router.push("/signUp")}>
+          <TouchableOpacity onPress={() => router.replace("/signUp")}>
             <Text className="text-[#F0C38E]">Sign up</Text>
           </TouchableOpacity>
         </View>
