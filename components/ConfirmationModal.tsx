@@ -137,3 +137,31 @@ export const StopEntryModal = ({
     </Modal>
   );
 }
+
+export const EjectNotifModal = ({ visible, onClose }: { visible: boolean; onClose: () => void } ) => {
+  return (
+    <Modal visible={visible} transparent animationType="fade">
+      <View className="flex-1 justify-center items-center bg-black/50">
+        <View className="w-90 bg-[#48426D] p-6 rounded-2xl shadow-md">
+          <Text className="text-xl font-bold text-[#F1AA9B] mb-4 text-center">
+            Ejection Notification
+          </Text>
+          <Text className="text-white text-center mb-4">
+            You have been ejected from the queue. {'\n'}
+          </Text>
+
+          <View className="flex-row justify-center mt-4">
+            <TouchableOpacity
+              onPress={onClose}
+              className="bg-[#F0C38E] py-3 px-6 rounded-lg mr-3"
+            >
+              <Text className="text-[#312C51] font-semibold text-lg">
+                Close
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+}

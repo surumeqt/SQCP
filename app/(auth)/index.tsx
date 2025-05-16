@@ -26,17 +26,15 @@ export default function Index() {
 
   return (
     <View className="flex-1 justify-center items-center bg-[#312C51] px-6">
-      {/* Animated Welcome Text */}
       <Animated.View style={animatedStyle}>
         <Text className="text-[#F0C38E] text-3xl font-bold text-center">
-          Welcome to Student Queue Coordination Platform
+          Welcome to GCQUEUING PLATFORM
         </Text>
         <Text className="text-[#F1AA9B] text-lg text-center mt-2">
           Manage student queues efficiently and hassle-free.
         </Text>
       </Animated.View>
 
-      {/* Animated "Get Started" Button */}
       <Animated.View style={[animatedStyle, { marginTop: 30 }]}>
         <TouchableOpacity
           onPress={() => router.replace("/login")}

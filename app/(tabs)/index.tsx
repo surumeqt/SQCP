@@ -1,46 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
-  TouchableOpacity,
-  BackHandler,
-  Alert,
+  TouchableOpacity
 } from "react-native";
-import { useFocusEffect, useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import MenuButton from "@/components/MenuButton";
 import Sidebar from "@/components/Sidebar";
+import { EjectNotifModal } from "@/components/ConfirmationModal";
+import { useBackExitHandler } from "@/hooks/useBackExitHandler";
+import * as Notifications from 'expo-notifications';
+import { sendPushNotification, registerForPushNotificationsAsync } from '@/utils/notifications';
+
 
 export default function Index() {
+  const params = useLocalSearchParams();
   const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isEjected, setIsEjected] = useState(false);
+  const lastEjectionId = useRef<string | null>(null);
+  const [expoPushToken, setExpoPushToken] = useState<string | undefined>();
+  useBackExitHandler();
 
-  useFocusEffect(() => {
-    const onBackPress = () => {
-      Alert.alert(
-        "Exit App",
-        "Are you sure you want to exit the app?",
-        [
-          { text: "Cancel", style: "cancel" },
-          {
-            text: "Exit",
-            style: "destructive",
-            onPress: () => BackHandler.exitApp(), // exits app
-          },
-        ],
-        { cancelable: true }
-      );
-      return true; // block default behavior
-    };
+  useEffect(() => {
+    const ejectedId = params?.ejected?.toString();
 
-    const subscription = BackHandler.addEventListener(
-      "hardwareBackPress",
-      onBackPress
-    );
+    if (expoPushToken && ejectedId && lastEjectionId.current !== ejectedId) {
+      sendPushNotification(expoPushToken);
+      setIsEjected(true);
+      lastEjectionId.current = ejectedId;
+    }
+  }, [params?.ejected, expoPushToken]);
 
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => {
+      if (token) setExpoPushToken(token);
+    });
+  
+    const subscription = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log('Notification tapped:', response);
+    });
+  
     return () => subscription.remove();
-  });
-
+    }, []);
   return (
     <View className="flex-1 bg-[#312C51] px-6 pt-12">
       <View className="absolute top-6 right-6">
@@ -50,7 +53,7 @@ export default function Index() {
       </View>
 
       <Text className="text-[#F1AA9B] text-3xl font-light text-center mb-6 mt-12">
-        Welcome to Student Process Queuing Platform
+        Welcome to Registrar Queuing App
       </Text>
 
       <View className="w-full max-w-md">
@@ -89,6 +92,7 @@ export default function Index() {
       </View>
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      <EjectNotifModal visible={isEjected} onClose={() => {setIsEjected(false); router.replace('/(tabs)')}} />
     </View>
   );
 }
