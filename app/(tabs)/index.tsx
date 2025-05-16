@@ -10,8 +10,8 @@ import MenuButton from "@/components/MenuButton";
 import Sidebar from "@/components/Sidebar";
 import { EjectNotifModal } from "@/components/ConfirmationModal";
 import { useBackExitHandler } from "@/hooks/useBackExitHandler";
-import * as Notifications from 'expo-notifications';
 import { sendPushNotification, registerForPushNotificationsAsync } from '@/utils/notifications';
+import * as Notifications from 'expo-notifications';
 
 
 export default function Index() {
