@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView} from 'react-native';
-import Marc from '@/components/marc';
+import StepsButton from '@/components/StepsButton';
 import ConfirmationModal from '@/components/ConfirmationModal';
 import { useState } from 'react';
 
@@ -13,12 +13,12 @@ export default function NewStudent() {
         contentContainerStyle={{ paddingVertical: 12, paddingHorizontal: 8 }}
         showsVerticalScrollIndicator={false}
       >     
-      <Marc text="Submit complete enrollment requirements to the IGS Office (Rm.105)" />
-      <Marc text='Fill-out Student Information in the Enrollment Evaluation Form' />
-      <Marc text='Review and affix signature in the Enrollment Evaluation Form' />
-      <Marc text="Submit Enrollment Evaluation Form to the Registrar's Office for Encoding" />
-      <Marc text="Submit E-Form and pay necessary fees at the Cashier (Windows 1 or 2)" />
-      <Marc text="Received the Official Reciept(OR) and E-Form" />
+      <StepsButton text="Submit complete enrollment requirements to the IGS Office (Rm.105)" />
+      <StepsButton text='Fill-out Student Information in the Enrollment Evaluation Form' />
+      <StepsButton text='Review and affix signature in the Enrollment Evaluation Form' />
+      <StepsButton text="Submit Enrollment Evaluation Form to the Registrar's Office for Encoding" />
+      <StepsButton text="Submit E-Form and pay necessary fees at the Cashier (Windows 1 or 2)" />
+      <StepsButton text="Received the Official Reciept(OR) and E-Form" />
       </ScrollView>
 
 

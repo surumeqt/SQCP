@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity} from 'react-native'
 import React from 'react'
-import Marc from '@/components/marc'
+import StepsButton from '@/components/StepsButton'
 import { useRouter } from "expo-router";
 
 export default function Enrollment() {
@@ -11,10 +11,10 @@ export default function Enrollment() {
         Enrollment
       </Text>
       <TouchableOpacity onPress={() => router.replace('/continuing')}>
-        <Marc text='Continuing Students'/>
+        <StepsButton text='Continuing Students'/>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.replace('/new_student')}>
-        <Marc text='New Student'/>
+        <StepsButton text='New Student'/>
       </TouchableOpacity>
     </View>
   )

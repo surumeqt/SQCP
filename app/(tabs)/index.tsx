@@ -13,7 +13,6 @@ import { useBackExitHandler } from "@/hooks/useBackExitHandler";
 import { sendPushNotification, registerForPushNotificationsAsync } from '@/utils/notifications';
 import * as Notifications from 'expo-notifications';
 
-
 export default function Index() {
   const params = useLocalSearchParams();
   const router = useRouter();
@@ -44,6 +43,7 @@ export default function Index() {
   
     return () => subscription.remove();
     }, []);
+    
   return (
     <View className="flex-1 bg-[#312C51] px-6 pt-12">
       <View className="absolute top-6 right-6">

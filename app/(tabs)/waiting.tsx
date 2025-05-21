@@ -1,21 +1,20 @@
 import { View, Text, BackHandler } from "react-native";
 import { useEffect, useState } from "react";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation} from "convex/react";
 import { useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native";
 import { api } from "../../convex/_generated/api";
 
 export default function WaitingScreen() {
   const router = useRouter();
+  const deleteEntry = useMutation(api.queue.deleteQueueEntry);
   const checkEntry = useQuery(api.queue.getActiveQueueEntryForUser);
   const [timeLeft, setTimeLeft] = useState<string | null>(null);
 
   // Prevent back navigation
   useFocusEffect(() => {
     const onBackPress = () => true;
-
     const subscription = BackHandler.addEventListener("hardwareBackPress", onBackPress);
-
     return () => {
       subscription.remove();
     };
@@ -41,6 +40,7 @@ export default function WaitingScreen() {
 
       if (diff === 0) {
         clearInterval(interval);
+        deleteEntry( { id: checkEntry._id } );
         router.replace("/(tabs)");
       }
     }, 1000);

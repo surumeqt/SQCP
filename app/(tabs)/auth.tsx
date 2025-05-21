@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView} from 'react-native'
-import Marc from '@/components/marc'
+import StepsButton from '@/components/StepsButton'
 import ConfirmationModal from '@/components/ConfirmationModal';
 import { useState } from 'react';
 
@@ -14,15 +14,15 @@ export default function Authentication() {
           <ScrollView
             contentContainerStyle={{ paddingVertical: 12, paddingHorizontal: 8 }}
             showsVerticalScrollIndicator={false}>
-            <Marc text='Secure GCform(Request form) from Windows 2'/>
-            <Marc text='Fill-out the form and check CAV (Certification of Authentication and verification'/>
-            <Marc text='Submit the form to the Office of the Registrar for verification'/>
-            <Marc text='Pay the corresponding fee at the Cashier (Windows 1 or 2)'/>
-            <Marc text='Submit the form and official reciept to the Office of the Registrar together with the following:
+            <StepsButton text='Secure GCform(Request form) from Windows 2'/>
+            <StepsButton text='Fill-out the form and check CAV (Certification of Authentication and verification'/>
+            <StepsButton text='Submit the form to the Office of the Registrar for verification'/>
+            <StepsButton text='Pay the corresponding fee at the Cashier (Windows 1 or 2)'/>
+            <StepsButton text='Submit the form and official reciept to the Office of the Registrar together with the following:
                   1.Photocopy of Official Transcript of Records.
                   2.Photocopy of Diplopma
                   3.Photocopy of RLE Summary (for BSN)'/>
-            <Marc text='A Claim Slip will be issued with the Date of Release'/>
+            <StepsButton text='A Claim Slip will be issued with the Date of Release'/>
           </ScrollView>
 
       <TouchableOpacity

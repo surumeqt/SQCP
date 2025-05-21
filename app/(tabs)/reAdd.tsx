@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView} from 'react-native';
-import Marc from '@/components/marc';
+import StepsButton from '@/components/StepsButton';
 import ConfirmationModal from '@/components/ConfirmationModal';
 import { useState } from 'react';
 
@@ -12,13 +12,13 @@ export default function reAdd() {
       <ScrollView 
         contentContainerStyle={{ paddingVertical: 12, paddingHorizontal: 8 }}
         showsVerticalScrollIndicator={false}>     
-        <Marc text='Secure GCForm Reg24 (Application for Re-admission) from Windows 2' />
-        <Marc text='Fill-out the form completely' />
-        <Marc text="Submit the form to the Office of the Registrar's for Verification" />
-        <Marc text="Pay the corresponding fee at the Cashier (Windows 1 or 2)" />
-        <Marc text="Seek the approval of the Program Coordinator and Dean of the College" />
-        <Marc text="Accomplish the CLEARANCE(included in the form)" />
-        <Marc text="Submit the accomplished form to the Office of the Registrar." />
+        <StepsButton text='Secure GCForm Reg24 (Application for Re-admission) from Windows 2' />
+        <StepsButton text='Fill-out the form completely' />
+        <StepsButton text="Submit the form to the Office of the Registrar's for Verification" />
+        <StepsButton text="Pay the corresponding fee at the Cashier (Windows 1 or 2)" />
+        <StepsButton text="Seek the approval of the Program Coordinator and Dean of the College" />
+        <StepsButton text="Accomplish the CLEARANCE(included in the form)" />
+        <StepsButton text="Submit the accomplished form to the Office of the Registrar." />
       </ScrollView>
 
       <TouchableOpacity

@@ -19,7 +19,7 @@ export const useBackExitHandler = () => {
           ],
           { cancelable: true }
         );
-        return true; // Prevent default behavior
+        return true;
       };
 
       const subscription = BackHandler.addEventListener(

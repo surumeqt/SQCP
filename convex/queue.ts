@@ -20,7 +20,6 @@ export const getNextQueueNumber = mutation({
       const isExpired = existing.expiresAt !== undefined && existing.expiresAt < now;
       const isInactive = existing.isActive === false;
 
-      // Clean up old or inactive entries
       if (isExpired || isInactive) {
         await ctx.db.delete(existing._id);
       } else {
@@ -32,7 +31,9 @@ export const getNextQueueNumber = mutation({
     const lastQueue = await ctx.db.query("queue").order("desc").first();
     const nextNumber = lastQueue ? lastQueue.number + 1 : 1;
 
-    const expiresAt = now + 5 * 60 * 1000;
+    const durationPerUser = 20 * 1000;
+    // const durationPerUser = 5 * 60 * 1000; // 5 minutes
+    const expiresAt = now + nextNumber * durationPerUser;
 
     const newEntryId = await ctx.db.insert("queue", {
       userId,

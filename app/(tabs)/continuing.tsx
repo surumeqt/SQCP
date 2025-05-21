@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView} from 'react-native';
-import Marc from '@/components/marc';
+import Marc from '@/components/StepsButton';
 import ConfirmationModal from '@/components/ConfirmationModal';
 import { useState } from 'react';
 
@@ -9,6 +9,9 @@ const [modalVisible, setModalVisible] = useState(false);
 
   return (
    <View className="flex-1 bg-[#312C51]">
+      <Text className="text-[#F1AA9B] text-xl font-semibold text-center mt-6 mb-4">
+          {headerText}
+        </Text>
       <ScrollView 
         contentContainerStyle={{ paddingVertical: 12, paddingHorizontal: 8 }}
         showsVerticalScrollIndicator={false}
@@ -20,7 +23,6 @@ const [modalVisible, setModalVisible] = useState(false);
       <Marc text="Submit E-Form and pay necessary fees at the Cashier (Windows 1 or 2)" />
       <Marc text="Received the Official Reciept(OR) and E-Form" />
       </ScrollView>
-
 
       <TouchableOpacity
            onPress={() => setModalVisible(true)}

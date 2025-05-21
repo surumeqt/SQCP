@@ -1,7 +1,7 @@
 import { Text, Animated } from "react-native";
 import React, { useEffect, useRef } from "react";
 
-export default function Marc({
+export default function StepsButton({
   text,
   variant = "default",
 }: {
