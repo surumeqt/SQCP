@@ -10,10 +10,10 @@ export default function Enrollment() {
       <Text className="text-[#F1AA9B] text-3xl font-bold text-center mb-6">
         Enrollment
       </Text>
-      <TouchableOpacity onPress={() => router.replace('/continuing')}>
+      <TouchableOpacity onPress={() => router.push('/continuing')}>
         <StepsButton text='Continuing Students'/>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.replace('/new_student')}>
+      <TouchableOpacity onPress={() => router.push('/new_student')}>
         <StepsButton text='New Student'/>
       </TouchableOpacity>
     </View>

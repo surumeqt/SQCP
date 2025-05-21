@@ -59,35 +59,35 @@ export default function Index() {
       <View className="w-full max-w-md">
         <MenuButton
           text="Student Certificate/Record"
-          onPress={() => router.replace("/Record")}
+          onPress={() => router.push("/Record")}
         />
         <MenuButton
           text="Authentication and Verification"
-          onPress={() => router.replace("/auth")}
+          onPress={() => router.push("/auth")}
         />
         <MenuButton
           text="ID Replacement"
-          onPress={() => router.replace("/id")}
+          onPress={() => router.push("/id")}
         />
         <MenuButton
           text="Evaluation of Transfer Credits"
-          onPress={() => router.replace("/transfer")}
+          onPress={() => router.push("/transfer")}
         />
         <MenuButton
           text="Enrollment"
-          onPress={() => router.replace("/enrol")}
+          onPress={() => router.push("/enrol")}
         />
         <MenuButton
           text="Adding/Dropping/Change of Schedule"
-          onPress={() => router.replace("/add")}
+          onPress={() => router.push("/add")}
         />
         <MenuButton
           text="Re-admission"
-          onPress={() => router.replace("/reAdd")}
+          onPress={() => router.push("/reAdd")}
         />
         <MenuButton
           text="Change in Program"
-          onPress={() => router.replace("/change")}
+          onPress={() => router.push("/change")}
         />
       </View>
 

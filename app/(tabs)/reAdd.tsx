@@ -9,6 +9,9 @@ export default function reAdd() {
   
   return (
    <View className="flex-1 bg-[#312C51]">
+      <Text className="text-[#F1AA9B] text-xl font-semibold text-center mt-6 mb-4">
+          {headerText}
+        </Text>
       <ScrollView 
         contentContainerStyle={{ paddingVertical: 12, paddingHorizontal: 8 }}
         showsVerticalScrollIndicator={false}>     
