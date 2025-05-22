@@ -53,7 +53,7 @@ export default function Index() {
       </View>
 
       <Text className="text-[#F1AA9B] text-3xl font-light text-center mb-6 mt-12">
-        Welcome to Registrar Queuing App
+        Welcome to GC Queuing App
       </Text>
 
       <View className="w-full max-w-md">

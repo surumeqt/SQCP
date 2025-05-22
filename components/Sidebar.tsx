@@ -39,12 +39,6 @@ export default function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose:
             </TouchableOpacity>
 
             <Text className="text-[#F0C38E] text-xl font-semibold mt-6 mb-4">Settings</Text>
-            <TouchableOpacity className="mb-4" onPress={() => router.replace("/privacy")}>
-            <Text className="text-white text-lg">Privacy</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="mb-4" onPress={() => router.replace("/")}>
-            <Text className="text-white text-lg">Help & Support</Text>
-            </TouchableOpacity>
             <TouchableOpacity onPress={() => setLogoutModalVisible(true)}>
             <Text className="text-red-400 text-lg">Logout</Text>
             </TouchableOpacity>
