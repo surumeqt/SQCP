@@ -10,8 +10,9 @@ import MenuButton from "@/components/MenuButton";
 import Sidebar from "@/components/Sidebar";
 import { EjectNotifModal } from "@/components/ConfirmationModal";
 import { useBackExitHandler } from "@/hooks/useBackExitHandler";
-import { sendPushNotification, registerForPushNotificationsAsync } from '@/utils/notifications';
+import { sendPushNotification } from '@/utils/notifications';
 import * as Notifications from 'expo-notifications';
+import { usePushNotificationsWithLogout } from "@/hooks/usePushNotificationsWithLogout";
 
 export default function Index() {
   const params = useLocalSearchParams();
@@ -21,6 +22,23 @@ export default function Index() {
   const lastEjectionId = useRef<string | null>(null);
   const [expoPushToken, setExpoPushToken] = useState<string | undefined>();
   useBackExitHandler();
+
+  usePushNotificationsWithLogout(); 
+
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        const { status } = await Notifications.getPermissionsAsync();
+        if (status === 'granted') {
+          const expoToken = await Notifications.getExpoPushTokenAsync();
+          setExpoPushToken(expoToken.data);
+        }
+      } catch (error) {
+        console.error("Error getting Expo Push Token for sendPushNotification:", error);
+      }
+    };
+    getToken();
+  }, []); // Run once to get token for sending
 
   useEffect(() => {
     const ejectedId = params?.ejected?.toString();
@@ -33,17 +51,12 @@ export default function Index() {
   }, [params?.ejected, expoPushToken]);
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then(token => {
-      if (token) setExpoPushToken(token);
-    });
-  
     const subscription = Notifications.addNotificationResponseReceivedListener(response => {
       console.log('Notification tapped:', response);
     });
-  
     return () => subscription.remove();
-    }, []);
-    
+  }, []);
+
   return (
     <View className="flex-1 bg-[#312C51] px-6 pt-12">
       <View className="absolute top-6 right-6">

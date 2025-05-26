@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View, Alert, ActivityIndicator } fro
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import { getClerkErrorMessage } from '@/utils/clerkErrors';
 
 export default function SignUp() {
     const { isLoaded, signUp, setActive } = useSignUp();
@@ -21,9 +21,9 @@ export default function SignUp() {
             await signUp.create({ emailAddress, password });
             await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
             setPendingVerification(true);
-        } catch (err) {
-            console.error("❌ Sign-Up Error:", err);
-            Alert.alert("Error", "Sign-up failed. Try again.");
+        } catch (err: any) {
+            const errorMessage = getClerkErrorMessage(err);
+            Alert.alert('Sign-Up Error', errorMessage )
         }
     };
 

@@ -28,7 +28,7 @@ export default function StepsButton({
 
   const baseClass = variant === "plain"
     ? "my-4 w-[90%] mx-auto p-2 items-center justify-center"
-    : "bg-[#F0C38E] rounded-2xl my-4 w-[90%] mx-auto p-2 items-center justify-center";
+    : "bg-[#F0C38E] rounded-2xl my-2 w-[90%] mx-auto p-2 items-center justify-center";
 
   const textClass = variant === "plain"
     ? "text-[#F8D8AD] font-bold text-xl text-center p-2"

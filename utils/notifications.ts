@@ -23,9 +23,9 @@ export async function sendPushNotification(expoPushToken: string) {
     await fetch('https://exp.host/--/api/v2/push/send', {
     method: 'POST',
     headers: {
-        accept: 'application/json',
-        'accept-encoding': 'gzip, deflate',
-        'content-Type': 'application/json',
+      accept: 'application/json',
+      'accept-encoding': 'gzip, deflate',
+      'content-Type': 'application/json',
     },
     body: JSON.stringify(message),
     })
@@ -35,11 +35,12 @@ export async function sendPushNotification(expoPushToken: string) {
 
 }
 
-export async function registerForPushNotificationsAsync() {
+// Pass the specific alert message to the callback
+export async function registerForPushNotificationsAsync(onTokenRetrievalFailure?: (message: string) => void) {
   let token;
 
   if (!Device.isDevice) {
-    alert('Must use physical device for Push Notifications');
+    onTokenRetrievalFailure?.('Must use a physical device for Push Notifications.');
     return null;
   }
 
@@ -55,16 +56,20 @@ export async function registerForPushNotificationsAsync() {
   }
 
   if (finalStatus !== 'granted') {
-    alert('Permission for push notifications was not granted');
+    onTokenRetrievalFailure?.(
+      'Permission for push notifications was not granted. You will be logged out.\n\n' +
+      'To enable notifications, you can RESET PERMISSIONS IN YOUR PHONE SETTINGS.'
+    );
     return null;
   }
 
   try {
     const expoToken = await Notifications.getExpoPushTokenAsync();
     token = expoToken.data;
-    console.log("Expo Push Token:", token);
+    console.log('Expo Push Token Retrieved: ', token)
   } catch (error) {
-    console.error("❌ Error getting Expo Push Token:", error);
+    onTokenRetrievalFailure?.('Failed to retrieve push notification token. You will be logged out.');
+    return null;
   }
 
   if (Platform.OS === 'android') {
@@ -78,4 +83,3 @@ export async function registerForPushNotificationsAsync() {
 
   return token;
 }
-

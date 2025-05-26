@@ -36,7 +36,7 @@ function AuthNavigation() {
         console.log("✅ User is signed in, redirecting to home...");
         router.replace("/(tabs)");
       } else if (!isSignedIn) {
-        console.log("🔒 User is not signed in, redirecting to auth...");
+        console.log("🔒 User is not signed in, redirecting to login...");
         router.replace("/(auth)");
       }
   }, [isLoaded, isSignedIn]);

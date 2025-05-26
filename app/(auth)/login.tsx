@@ -1,10 +1,11 @@
 import { useSignIn } from '@clerk/clerk-expo'
 import { useRouter } from 'expo-router'
-import { Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Text, TextInput, View, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
 import React, { useState } from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { getClerkErrorMessage } from '@/utils/clerkErrors';
 
-export default function Page() {
+export default function Login() {
   const { signIn, setActive, isLoaded } = useSignIn()
   const router = useRouter()
 
@@ -24,8 +25,9 @@ export default function Page() {
         await setActive({ session: signInAttempt.createdSessionId })
         router.replace('/(tabs)')
       }
-    } catch (err) {
-      console.error(err)
+    } catch (err: any) {
+      const errorMessage = getClerkErrorMessage(err);
+      Alert.alert('Login Error', errorMessage )
     } finally {
       setLoading(false)
     }
